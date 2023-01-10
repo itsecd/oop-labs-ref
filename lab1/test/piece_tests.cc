@@ -26,7 +26,7 @@ static bool check(
 }
 
 TEST(PieceTests, King) {
-    const Piece king = Piece::create_king(true);
+    const auto king = Piece::create_king(true);
     const bool expected[][CHECK_SIZE] = {
         { false, false, false, false, false },
         { false,  true,  true,  true, false },
@@ -39,7 +39,7 @@ TEST(PieceTests, King) {
 }
 
 TEST(PieceTests, Queen) {
-    const Piece queen = Piece::create_queen(true);
+    const auto queen = Piece::create_queen(true);
     const bool expected[][CHECK_SIZE] = {
         {  true, false,  true, false,  true },
         { false,  true,  true,  true, false },
@@ -52,7 +52,7 @@ TEST(PieceTests, Queen) {
 }
 
 TEST(PieceTests, Rook) {
-    const Piece rook = Piece::create_rook(true);
+    const auto rook = Piece::create_rook(true);
     const bool expected[][CHECK_SIZE] = {
         { false, false,  true, false, false },
         { false, false,  true, false, false },
@@ -65,7 +65,7 @@ TEST(PieceTests, Rook) {
 }
 
 TEST(PieceTests, Bishop) {
-    const Piece bishop = Piece::create_bishop(true);
+    const auto bishop = Piece::create_bishop(true);
     const bool expected[][CHECK_SIZE] = {
         {  true, false, false, false,  true },
         { false,  true, false,  true, false },
@@ -78,7 +78,7 @@ TEST(PieceTests, Bishop) {
 }
 
 TEST(PieceTests, Knight) {
-    const Piece knight = Piece::create_knight(true);
+    const auto knight = Piece::create_knight(true);
     const bool expected[][CHECK_SIZE] = {
         { false,  true, false,  true, false },
         {  true, false, false, false,  true },
@@ -91,7 +91,7 @@ TEST(PieceTests, Knight) {
 }
 
 TEST(PieceTests, PawnUp) {
-    const Piece pawn = Piece::create_pawn(true, Point(-1, 0));
+    const auto pawn = Piece::create_pawn(true, Point(-1, 0));
     const bool expected_captures[][CHECK_SIZE] = {
         { false, false, false, false, false },
         { false,  true, false,  true, false },
@@ -111,7 +111,7 @@ TEST(PieceTests, PawnUp) {
 }
 
 TEST(PieceTests, PawnDown) {
-    const Piece pawn = Piece::create_pawn(true, Point(+1, 0));
+    const auto pawn = Piece::create_pawn(true, Point(+1, 0));
     const bool expected_captures[][2 * CHECK_RADIUS + 1] = {
         { false, false, false, false, false },
         { false, false, false, false, false },
