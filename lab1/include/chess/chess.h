@@ -74,16 +74,13 @@ namespace chess {
 
 
 
-    using PromotePawnCallback = Type(*)(Point position, Type* available_types, int available_types_count);
-
     class Board {
     private:
         Piece _pieces[BOARD_SIZE][BOARD_SIZE];
-        PromotePawnCallback _promote_pawn_callback;
         bool _can_continue;
         bool _is_white_turn;
 
-        Board(PromotePawnCallback promote_pawn_callback);
+        Board();
 
     public:
         friend class BoardBuilder;
@@ -103,8 +100,6 @@ namespace chess {
         Board _board;
 
     public:
-        BoardBuilder(PromotePawnCallback promote_pawn_callback);
-
         Piece operator[](Point p) const;
 
         Piece& operator[](Point p);

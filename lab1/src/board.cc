@@ -8,8 +8,7 @@ using namespace std;
 
 
 
-Board::Board(PromotePawnCallback promote_pawn_callback) :
-    _promote_pawn_callback(promote_pawn_callback),
+Board::Board() :
     _can_continue(true),
     _is_white_turn(true)
 { }
@@ -65,8 +64,6 @@ void Board::move(Point src, Point dst) {
 
     _pieces[dst.row][dst.col] = (*this)[src];
     _pieces[src.row][src.col] = Piece();
-
-    // TODO: _promote_pawn_callback
 
     _is_white_turn = !_is_white_turn;
 }

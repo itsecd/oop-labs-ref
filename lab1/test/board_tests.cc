@@ -16,7 +16,7 @@ static bool operator==(Piece lhs, Piece rhs) {
 
 
 TEST(BoardTests, WhiteGoesFirst) {
-    BoardBuilder board_builder(nullptr);
+    BoardBuilder board_builder;
     reset_to_initial(board_builder);
     auto board = board_builder.build();
 
@@ -31,7 +31,7 @@ TEST(BoardTests, WhiteGoesFirst) {
 
 
 TEST(BoardTests, BishopCanPass) {
-    BoardBuilder board_builder(nullptr);
+    BoardBuilder board_builder;
     const auto bishop = Piece::create_bishop(true);
     board_builder[Point(0, 0)] = bishop;
     board_builder[Point(2, 2)] = Piece::create_rook(false);
@@ -43,7 +43,7 @@ TEST(BoardTests, BishopCanPass) {
 }
 
 TEST(BoardTests, BishopCanNotPass) {
-    BoardBuilder board_builder(nullptr);
+    BoardBuilder board_builder;
     const auto bishop = Piece::create_bishop(true);
     const auto rook = Piece::create_rook(false);
     board_builder[Point(0, 0)] = Piece::create_bishop(true);
@@ -59,7 +59,7 @@ TEST(BoardTests, BishopCanNotPass) {
 
 
 TEST(BoardTests, KnightCanPass) {
-    BoardBuilder board_builder(nullptr);
+    BoardBuilder board_builder;
     const auto knight = Piece::create_knight(true);
     const auto rook = Piece::create_rook(false);
     board_builder[Point(0, 0)] = knight;

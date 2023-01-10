@@ -5,10 +5,6 @@
 using namespace chess;
 using namespace std;
 
-BoardBuilder::BoardBuilder(PromotePawnCallback promote_pawn_callback) :
-    _board(promote_pawn_callback)
-{ }
-
 Piece BoardBuilder::operator[](Point p) const {
     return _board[p];
 }
