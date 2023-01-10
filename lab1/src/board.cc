@@ -72,7 +72,6 @@ void Board::move(Point src, Point dst) {
 
 bool chess::can_pass(const Board& board, const Point src, const Point dst) {
     const auto src_piece = board[src];
-    const auto dst_piece = board[dst];
 
     if (src_piece.get_type() == Type::None) {
         throw logic_error("No piece in src.");

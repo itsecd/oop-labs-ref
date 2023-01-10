@@ -35,6 +35,8 @@ void chess::reset_to_initial(BoardBuilder& board_builder) {
     const auto top_color = false;
     const auto bottom_color = !top_color;
 
+    reset_to_empty(board_builder);
+
     board_builder[Point(0, 0)] = Piece::create_rook(top_color);
     board_builder[Point(0, 1)] = Piece::create_knight(top_color);
     board_builder[Point(0, 2)] = Piece::create_bishop(top_color);
