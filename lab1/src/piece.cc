@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <stdexcept>
 
 using namespace chess;
 using namespace std;
@@ -29,7 +30,9 @@ Piece Piece::create_knight(const bool is_white) {
 }
 
 Piece Piece::create_pawn(const bool is_white, const Point orientation) {
-    assert((orientation == Point(-1, 0) || orientation == Point(+1, 0)) && "Piece::create_pawn: Orientation is out of range.");
+    if (orientation != Point(-1, 0) && orientation != Point(+1, 0)) {
+        throw logic_error("Piece::create_pawn: Orientation is out of range.");
+    }
 
     return Piece(Type::Pawn, is_white, orientation);
 }

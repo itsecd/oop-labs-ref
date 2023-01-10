@@ -5,6 +5,7 @@ project(chess-v1-tests CXX)
 enable_testing()
 
 add_executable(${PROJECT_NAME}
+    "board_tests.cc"
     "piece_tests.cc"
     "point_tests.cc"
 )

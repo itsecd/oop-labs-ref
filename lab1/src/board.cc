@@ -63,8 +63,10 @@ void Board::move(Point src, Point dst) {
         _can_continue = false;
     }
 
-    (*this)[dst] = (*this)[src];
-    (*this)[src] = Piece();
+    _pieces[dst.row][dst.col] = (*this)[src];
+    _pieces[src.row][src.col] = Piece();
+
+    // TODO: _promote_pawn_callback
 
     _is_white_turn = !_is_white_turn;
 }

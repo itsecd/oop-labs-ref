@@ -4,6 +4,7 @@ project(chess-v1 CXX)
 
 add_library(${PROJECT_NAME} SHARED
     "board.cc"
+    "board_builder.cc"
     "piece.cc"
     "point.cc"
 )

@@ -4,31 +4,61 @@
 
 using namespace chess;
 using namespace std;
-//
-//const auto top_color = Color::Black;
-//const auto bottom_color = Color::White;
-//const auto top_orientation = Square(1, 0);
-//const auto bottom_orientation = Square(-1, 0);
-//
-//_board[0][0] = Piece(Type::Rook, top_color, top_orientation);
-//_board[0][1] = Piece(Type::Knight, top_color, top_orientation);
-//_board[0][2] = Piece(Type::Bishop, top_color, top_orientation);
-//_board[0][3] = Piece(Type::Queen, top_color, top_orientation);
-//_board[0][4] = Piece(Type::King, top_color, top_orientation);
-//_board[0][5] = Piece(Type::Bishop, top_color, top_orientation);
-//_board[0][6] = Piece(Type::Knight, top_color, top_orientation);
-//_board[0][7] = Piece(Type::Rook, top_color, top_orientation);
-//
-//_board[BOARD_SIZE - 1][0] = Piece(Type::Rook, bottom_color, bottom_orientation);
-//_board[BOARD_SIZE - 1][1] = Piece(Type::Knight, bottom_color, bottom_orientation);
-//_board[BOARD_SIZE - 1][2] = Piece(Type::Bishop, bottom_color, bottom_orientation);
-//_board[BOARD_SIZE - 1][3] = Piece(Type::Queen, bottom_color, bottom_orientation);
-//_board[BOARD_SIZE - 1][4] = Piece(Type::King, bottom_color, bottom_orientation);
-//_board[BOARD_SIZE - 1][5] = Piece(Type::Bishop, bottom_color, bottom_orientation);
-//_board[BOARD_SIZE - 1][6] = Piece(Type::Knight, bottom_color, bottom_orientation);
-//_board[BOARD_SIZE - 1][7] = Piece(Type::Rook, bottom_color, bottom_orientation);
-//
-//for (int col = 0; col < BOARD_SIZE; ++col) {
-//    _board[1][col] = Piece(Type::Pawn, top_color, top_orientation);
-//    _board[BOARD_SIZE - 2][col] = Piece(Type::Pawn, bottom_color, bottom_orientation);
-//}
+
+BoardBuilder::BoardBuilder(PromotePawnCallback promote_pawn_callback) :
+    _board(promote_pawn_callback)
+{ }
+
+Piece BoardBuilder::operator[](Point p) const {
+    return _board[p];
+}
+
+Piece& BoardBuilder::operator[](Point p) {
+    if (!is_point_on_board(p)) {
+        throw invalid_argument("BoardBuilder::operator[]: Point is out of range.");
+    }
+
+    return _board._pieces[p.row][p.col];
+}
+
+Board BoardBuilder::build() const {
+    return _board;
+}
+
+
+
+void chess::reset_to_empty(BoardBuilder& board_builder) {
+    for (int i = 0; i < BOARD_SIZE; ++i) {
+        for (int j = 0; j < BOARD_SIZE; ++j) {
+            board_builder[Point(i, j)] = Piece();
+        }
+    }
+}
+
+void chess::reset_to_initial(BoardBuilder& board_builder) {
+    const auto top_color = false;
+    const auto bottom_color = !top_color;
+
+    board_builder[Point(0, 0)] = Piece::create_rook(top_color);
+    board_builder[Point(0, 1)] = Piece::create_knight(top_color);
+    board_builder[Point(0, 2)] = Piece::create_bishop(top_color);
+    board_builder[Point(0, 3)] = Piece::create_queen(top_color);
+    board_builder[Point(0, 4)] = Piece::create_king(top_color);
+    board_builder[Point(0, 5)] = Piece::create_bishop(top_color);
+    board_builder[Point(0, 6)] = Piece::create_knight(top_color);
+    board_builder[Point(0, 7)] = Piece::create_rook(top_color);
+
+    for (int col = 0; col < BOARD_SIZE; ++col) {
+        board_builder[Point(1, col)] = Piece::create_pawn(top_color, Point(1, 0));
+        board_builder[Point(BOARD_SIZE - 2, col)] = Piece::create_pawn(bottom_color, Point(-1, 0));
+    }
+
+    board_builder[Point(BOARD_SIZE - 1, 0)] = Piece::create_rook(bottom_color);
+    board_builder[Point(BOARD_SIZE - 1, 1)] = Piece::create_knight(bottom_color);
+    board_builder[Point(BOARD_SIZE - 1, 2)] = Piece::create_bishop(bottom_color);
+    board_builder[Point(BOARD_SIZE - 1, 3)] = Piece::create_queen(bottom_color);
+    board_builder[Point(BOARD_SIZE - 1, 4)] = Piece::create_king(bottom_color);
+    board_builder[Point(BOARD_SIZE - 1, 5)] = Piece::create_bishop(bottom_color);
+    board_builder[Point(BOARD_SIZE - 1, 6)] = Piece::create_knight(bottom_color);
+    board_builder[Point(BOARD_SIZE - 1, 7)] = Piece::create_rook(bottom_color);
+}

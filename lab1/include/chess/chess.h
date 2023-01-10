@@ -42,8 +42,7 @@ namespace chess {
         Rook,
         Bishop,
         Knight,
-        Pawn,
-        TYPE_COUNT
+        Pawn
     };
 
 
@@ -101,16 +100,16 @@ namespace chess {
 
 
     class BoardBuilder {
-        Piece _pieces[BOARD_SIZE][BOARD_SIZE];
+        Board _board;
 
     public:
-        BoardBuilder() = default;
+        BoardBuilder(PromotePawnCallback promote_pawn_callback);
 
         Piece operator[](Point p) const;
 
         Piece& operator[](Point p);
 
-        Board build() const noexcept;
+        Board build() const;
     };
 
     void reset_to_empty(BoardBuilder& board_builder);
